@@ -1,4 +1,4 @@
-pragma solidity ^0.5.6;
+pragma solidity ^0.5.0;
 
 /*
  * @title String & slice memory utility library for Solidity contracts.
@@ -236,32 +236,32 @@ library StringUtilsLib {
      * @param other The second slice memory to compare.
      * @return The result of the comparison.
      */
-    // function compare(slice memory self, slice memory other) internal view returns (int) {
-    //     uint shortest = self._len;
-    //     if (other._len < self._len)
-    //         shortest = other._len;
+    function compare(slice memory self, slice memory other) internal view returns (int) {
+        uint shortest = self._len;
+        if (other._len < self._len)
+            shortest = other._len;
 
-    //     uint selfptr = self._ptr;
-    //     uint otherptr = other._ptr;
-    //     for (uint idx = 0; idx < shortest; idx += 32) {
-    //         uint a;
-    //         uint b;
-    //         assembly {
-    //             a := mload(selfptr)
-    //             b := mload(otherptr)
-    //         }
-    //         if (a != b) {
-    //             // Mask out irrelevant bytes and check again
-    //             uint mask = ~(2 ** (8 * (32 - shortest + idx)) - 1);
-    //             uint diff = (a & mask) - (b & mask);
-    //             if (diff != 0)
-    //                 return int(diff);
-    //         }
-    //         selfptr += 32;
-    //         otherptr += 32;
-    //     }
-    //     return int(self._len) - int(other._len);
-    // }
+        uint selfptr = self._ptr;
+        uint otherptr = other._ptr;
+        for (uint idx = 0; idx < shortest; idx += 32) {
+            uint a;
+            uint b;
+            assembly {
+                a := mload(selfptr)
+                b := mload(otherptr)
+            }
+            if (a != b) {
+                // Mask out irrelevant bytes and check again
+                uint mask = ~(2 ** (8 * (32 - shortest + idx)) - 1);
+                uint diff = (a & mask) - (b & mask);
+                if (diff != 0)
+                    return int(diff);
+            }
+            selfptr += 32;
+            otherptr += 32;
+        }
+        return int(self._len) - int(other._len);
+    }
 
     //Takes string and returns int
     function compare(string memory self, string memory other) internal returns (int) {
