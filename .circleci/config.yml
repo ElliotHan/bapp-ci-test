@@ -1,21 +1,11 @@
 # Use the latest 2.1 version of CircleCI pipeline processing engine, see https://circleci.com/docs/2.0/configuration-reference/
-version: 2.1
+version: 2
 
 defaults: &defaults
   docker:
     - image: maxsam4/solidity-kit
 
 jobs:
-  build:
-    <<: *defaults
-    steps:
-      - checkout
-      - run:
-          name: NPM Install
-          command: npm install
-      - run:
-          name: Get Permission
-          command: chmod +x ./scripts/coverage.sh
   test-code:
     <<: *defaults
     steps:
@@ -28,5 +18,19 @@ jobs:
     steps:
       - checkout
       - run:
+          name: NPM Install
+          command: npm install
+      - run:
+          name: Get Permission
+          command: chmod +x ./scripts/coverage.sh
+      - run:
           name: Coverage Test
           command: ./scripts/coverage.sh
+
+
+workflows:
+  version: 2
+  code_quality:
+    jobs:
+      - test-code
+      - test-code-coverage
