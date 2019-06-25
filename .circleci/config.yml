@@ -1,8 +1,13 @@
 # Use the latest 2.1 version of CircleCI pipeline processing engine, see https://circleci.com/docs/2.0/configuration-reference/
 version: 2.1
 
+defaults: &defaults
+  docker:
+    - image: maxsam4/solidity-kit
+
 jobs:
   build:
+    <<: *defaults
     docker:
       - image: maxsam4/solidity-kit
     steps:
@@ -14,12 +19,14 @@ jobs:
           name: Get Permission
           command: chmod +x ./scripts/coverage.sh
   test-code:
+    <<: *defaults
     steps:
       - checkout
       - run:
           name: Truffle Test
           command: truffle test
   test-code-coverage:
+    <<: *defaults
       - checkout
       - run:
           name: Coverage Test
