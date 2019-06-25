@@ -8,8 +8,6 @@ defaults: &defaults
 jobs:
   build:
     <<: *defaults
-    docker:
-      - image: maxsam4/solidity-kit
     steps:
       - checkout
       - run:
@@ -27,6 +25,7 @@ jobs:
           command: truffle test
   test-code-coverage:
     <<: *defaults
+    steps:
       - checkout
       - run:
           name: Coverage Test
