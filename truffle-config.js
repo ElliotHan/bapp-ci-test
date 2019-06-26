@@ -57,7 +57,13 @@ module.exports = {
       // from: <address>,        // Account to send txs from (default: accounts[0])
       // websockets: true        // Enable EventEmitter interface for web3 (default: false)
     // },
-
+    coverage: {
+      host: 'localhost',
+      network_id: '*', // eslint-disable-line camelcase
+      port: 8545,
+      gas: 0xfffffffffff,
+      gasPrice: 0x01
+  }
     // Useful for deploying to a public network.
     // NB: It's important to wrap the provider as a function.
     // ropsten: {
