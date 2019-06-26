@@ -3,7 +3,6 @@ version: 2.1
 orbs:
   codecov: codecov/codecov@1.0.2
 
-  
 defaults: &defaults
   docker:
     - image: maxsam4/solidity-kit
@@ -30,7 +29,7 @@ jobs:
           name: Coverage Test
           command: ./scripts/coverage.sh
       - codecov/upload:
-          file: {{ ./coverage/lcov.info }}
+          file: ./coverage/lcov.info
 
 
 workflows:
