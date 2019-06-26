@@ -16,7 +16,7 @@ contract StringUtilsLibTest {
         stringA = "I will be";
         stringB = "will";
         Assert.equal(stringA.rfind(stringB), "I will", "testRfind");
-        Assert.equal(stringA.rfind(stringB), "testRfind");
+        Assert.equal(stringA.rfind(stringB), "", "testRfind");
     }
 
     function testLen() public {
