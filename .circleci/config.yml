@@ -1,7 +1,7 @@
 # Use the latest 2.1 version of CircleCI pipeline processing engine, see https://circleci.com/docs/2.0/configuration-reference/
 version: 2.1
 orbs:
-  codecov: codecov/codecov@1.0.2
+  codecov: codecov/codecov@1.0.5
 
 defaults: &defaults
   docker:
@@ -30,6 +30,8 @@ jobs:
           command: ./scripts/coverage.sh
       - codecov/upload:
           file: ./coverage/lcov.info
+          token: "8ed39ec2-0a3b-4713-ace5-3207f473075a"
+
 
 
 workflows:
