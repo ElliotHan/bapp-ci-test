@@ -12,6 +12,12 @@ contract StringUtilsLibTest {
 
 	event Print(string message, bytes32 data);
 
+    function testRfind() public {
+        stringA = "I will be";
+        stringB = "will";
+        Assert.equal(stringA.rfind(stringB), "I will", "testRfind");
+        Assert.equal(stringA.rfind(stringB), "testRfind");
+    }
 
     function testLen() public {
         stringA = "I love Klaytn!!";
